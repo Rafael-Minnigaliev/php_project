@@ -1,0 +1,68 @@
+<div style="display: flex">
+    <form class="good_form" action="index.php?c=catalog&act=AddGood" method="post" enctype="multipart/form-data">
+        <h1 class="good_form__item">Добавить новый товар</h1>
+        <label>Название: <input class="good_form__item" type="text" name="goodName" required></label><br>
+        <label>Цена: <input class="good_form__item good_form__item_price" type="number" name="goodPrice" required></label><br>
+        <label>Краткое описание: <input class="good_form__item" type="text" name="goodInfo" required></label><br>
+        Пол:
+        <select class="good_form__item" name="genderId" required>
+            <option value="none" selected>Пол</option>
+            <option value="1">Женский</option>
+            <option value="2">Мужской</option>
+            <option value="3">Унисекс</option>
+        </select><br>
+        Категория:
+        <select class="good_form__item" name="goodCategoryId" required>
+            <option value="none" selected>Категория</option>
+            <option value="1">Одежда</option>
+            <option value="2">Аксессуары</option>
+            <option value="3">Обувь</option>
+            <option value="4">Рюкзаки и сумки</option>
+        </select>
+        <p>Описание: </p>
+        <textarea class="good_form__item" name="goodFullInfo" cols="60" rows="10" required></textarea><br>
+        <input class="good_form__item" type="file" name="photo" accept="image/*"><br>
+        <input class="good_form__item" type="submit" value="Добавить">
+    </form>
+    {% if status == 1 %}
+    <h2>Товар успешно добавлен</h2>
+    {% elseif status == 2 %}
+    <h2>Что-то пошло не так, попробуйте загрузить снова.</h2>
+    {% endif %}
+</div>
+
+<form class="filter" action="index.php?c=catalog" method="post">
+    <div>
+        <select class="filter__gender_select" name="gender">
+            <option value="none" selected>Пол</option>
+            <option value="1">Женский</option>
+            <option value="2">Мужской</option>
+            <option value="3">Унисекс</option>
+        </select>
+    </div>
+    <div class="filter__category">
+        <select class="filter__category_select" name="gCategory">
+            <option value="none" selected>Категория</option>
+            <option value="1">Одежда</option>
+            <option value="2">Аксессуары</option>
+            <option value="3">Обувь</option>
+            <option value="4">Рюкзаки и сумки</option>
+        </select>
+    </div>
+    <input class="filter__btn" type="submit" value="Подобрать">
+</form>
+
+{% if data == null %}
+<h3>Извините, на данный момент нет товаров удовлетворяющих данным критериям.</h3>
+{% endif %}
+<ul class="catalog" id="catalog__list">
+    {% for item in data %}
+        {% include 'catalog/v_goods_card.twig' %}
+    {% endfor %}
+</ul>
+{% if maxPage > 1 %}
+<button page="1" max_page="{{ maxPage }}" gcat="{{ gCat }}" gen="{{ gen }}" uid="{{ id }}" admin="1" class="catalog__show_btn" id="showmore-button">Показать ещё</button>
+{% endif %}
+<script src="public/js/showMoreGoods.js"></script>
+<script src="public/js/deleteGood.js"></script>
+<script src="public/js/changeGood.js"></script>

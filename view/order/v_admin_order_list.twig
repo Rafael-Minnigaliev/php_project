@@ -1,0 +1,42 @@
+<table>
+    <tr>
+        <th>№ заказа</th>
+        <th>Заказчик</th>
+        <th>Номер телефона</th>
+        <th>Адрес доставки</th>
+        <th>Дата оформления заказа</th>
+        <th>Статус заказа</th>
+        <th>Сохранить</th>
+        <th>Детали заказа</th>
+    </tr>
+    {% for item in data %}
+    <tr>
+        <td>{{ item.id }}</td>
+        {% if item.oName %}
+            <td>{{ item.oName }}</td>
+            <td>{{ item.oTelephone }}</td>
+            <td>{{ item.oAddress }}</td>
+        {% else %}
+            <td>{{ item.name }}</td>
+            <td>{{ item.telephone }}</td>
+            <td>{{ item.address }}</td>
+        {% endif %}
+        <td>{{ item.date }}</td>
+        <form action="index.php?c=order&act=ChangeOrderStatus&id={{ item.id }}" method="post">
+            <td style="display: flex; align-items: center; height: 40px; padding-left: 5px">
+                <select style="margin-right: 20px; width: 105px;" name="orderStatus">
+                    <option style="display: none" value=""></option>
+                    <option value="1">В работе</option>
+                    <option value="2">На доставке</option>
+                    <option value="3">Выполнен</option>
+                    <option value="4">Отменён</option>
+                </select>
+                <p style="color: red; font-weight: bold">{{ item.status }}</p>
+            </td>
+            <td><button>Сохранить</button></td>
+        </form>
+        <td><a href="index.php?c=order&act=AdminOrderInfo&id={{ item.id }}"><button>Детали заказа</button></a></td>
+    </tr>
+    {% endfor %}
+</table>
+

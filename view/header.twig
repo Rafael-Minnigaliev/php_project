@@ -1,0 +1,18 @@
+<section class="header__wrapp center">
+    <nav>
+        <a class="header__menu_item" href="index.php">Главная</a>
+        <a class="header__menu_item" href="index.php?c=catalog">Каталог</a>
+        {% if userSession %}
+        <a class="header__menu_item" href="index.php?c=user&act=Profile">Мой кабинет</a>
+        {% if admin %}
+        <a class="header__menu_item" href="index.php?c=order&act=AdminOrderList">Управление заказами</a>
+        {% endif %}
+        {% else %}
+        <a class="header__menu_item" href="index.php?c=user&act=Login">Войти</a>
+        <a class="header__menu_item" href="index.php?c=user&act=Reg">Зарегистрироваться</a>
+        {% endif %}
+    </nav>
+    {% if not admin %}
+    <a href="index.php?c=cart" class="cart_link"><button class="cart_link__btn">Корзина <span id="cart__id">{{ cartCount.sum }}</span></button></a>
+    {% endif %}
+</section>

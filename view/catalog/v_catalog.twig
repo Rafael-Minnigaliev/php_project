@@ -1,0 +1,32 @@
+<form class="filter" action="index.php?c=catalog" method="post">
+    <div>
+        <select class="filter__gender_select" name="gender">
+            <option value="none" selected>Пол</option>
+            <option value="1">Женский</option>
+            <option value="2">Мужской</option>
+            <option value="3">Унисекс</option>
+        </select>
+    </div>
+    <div class="filter__category">
+        <select class="filter__category_select" name="gCategory">
+            <option value="none" selected>Категория</option>
+            <option value="1">Одежда</option>
+            <option value="2">Аксессуары</option>
+            <option value="3">Обувь</option>
+            <option value="4">Рюкзаки и сумки</option>
+        </select>
+    </div>
+    <input class="filter__btn" type="submit" value="Подобрать">
+</form>
+
+{% if data == null %}
+<h3>Извините, на данный момент нет товаров удовлетворяющих данным критериям.</h3>
+{% endif %}
+<ul class="catalog" id="catalog__list">
+    {% include 'catalog/v_goods_card.twig' %}
+</ul>
+{% if maxPage > 1 %}
+<button page="1" max_page="{{ maxPage }}" gcat="{{ gCat }}" gen="{{ gen }}" uid="{{ id }}" admin="" class="catalog__show_btn" id="showmore-button">Показать ещё</button>
+{% endif %}
+<script src="public/js/showMoreGoods.js"></script>
+<script src="public/js/cart.js"></script>

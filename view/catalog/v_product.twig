@@ -1,0 +1,20 @@
+<div class="product">
+    <img src="public/images/goods/{{ data.img }}" alt="photo"></a>
+    <div class="product__info">
+        <p class="product__text">Краткая информация:&nbsp; {{ data.info }}</p>
+        <p class="product__text">Пол:&nbsp; {{ data.gen_name }}</p>
+        <p class="product__text">Категория:&nbsp; {{ data.good_cat_name }}</p>
+        <p class="product__text">Цена:&nbsp; {{ data.price }}</p>
+        {% if not admin %}
+            {% if uid %}
+                <button onclick="addToCart({{ data.id }}, {{ uid }})" class="product__btn">Добавить вкорзину</button>
+            {% else %}
+                <button onclick="addToCart({{ data.id }}, '{{ sid }}')" class="product__btn">Добавить вкорзину</button>
+            {% endif %}
+        {% endif %}
+    </div>
+</div>
+<h3 class="product__description_title">Описание</h3>
+<p class="product__description">{{ data.full_info }}</p>
+<input type="button" onclick="history.back(-1)" value="Вернуться назад">
+<script src="public/js/cart.js"></script>

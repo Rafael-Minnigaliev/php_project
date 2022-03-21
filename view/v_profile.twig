@@ -1,0 +1,10 @@
+<section class="profile">
+    <p class="profile__item">Имя:&nbsp; {{ data.name }}</p>
+    <p class="profile__item">Логин:&nbsp; {{ data.login }}</p>
+    {% if admin != 1 %}
+    <p class="profile__item">Номер телефона:&nbsp; {{ data.telephone }}</p>
+    <p class="profile__item">Адрес:&nbsp; {{ data.address }}</p>
+    <a class="profile__link" href="index.php?c=order&act=OrderList">Мои заказы</a><br>
+    {% endif %}
+</section>
+<a class="profile__btn" href="index.php?c=user&act=LogOut">Выйти</a>

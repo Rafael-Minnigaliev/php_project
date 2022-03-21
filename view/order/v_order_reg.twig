@@ -1,0 +1,76 @@
+{% if orderId %}
+    <h1 style="text-align: center; width: 600px; margin: 0 auto">Ваш заказ №{{ orderId }} находится в обработке. В течении 10 минут с вами свяжется наш сотрудник для подтверждения заказа.</h1>
+{% else %}
+<div class="order__wrapp">
+    <section class="order">
+        {% if userInfo %}
+        <form id="form">
+            <input type="hidden" name="userid" value="{{ userId }}">
+            <p class="order__title">Ваш номер телефона *</p>
+            <input class="order__input" type="tel" name="tel" value="{{ userInfo.telephone }}"><br>
+            <p class="order__title">Адрес доставки *</p>
+            <textarea class="order__input" name="addr" cols="30" rows="3">{{ userInfo.address }}</textarea><br>
+            <div class="order__btn_wrapp">
+                <input class="order__btn" type="submit" value="Изменить">
+                <p id="message"></p>
+            </div>
+        </form>
+        <form action="index.php?c=order&act=OrderRegistration" method="post">
+            <div class="order__pay_method">
+                <p class="order__title">Способ оплаты *</p>
+                <select class="order__select" name="payMethod" required>
+                    <option class="order__select_first-child" value="">Способ оплаты</option>
+                    <option value="Наличкой">Наличкой</option>
+                    <option value="Картой при получении">Картой при получении</option>
+                </select>
+            </div>
+            <p class="order__title order__title_note">( * обязательно к заполнению! )</p>
+            <div>
+                <p class="order__title">Предположительная дата доставки:&nbsp; {{ deliveryDate }}</p>
+                <p class="order__total_price">Итого к оплате:&nbsp; {{ totalPrice.sum }}</p>
+                <input class="order__submit" type="submit" value="Оформить заказ">
+            </div>
+        </form>
+        {% else %}
+        <form action="index.php?c=order&act=OrderRegistration" method="post">
+            <p class="order__title">Ваше имя *</p>
+            <input class="order__input" type="text" name="name" required><br>
+            <p class="order__title">Ваш номер телефона *</p>
+            <input class="order__input" type="tel" name="tel" required><br>
+            <p class="order__title">Адрес доставки *</p>
+            <textarea class="order__input" name="addr" cols="30" rows="3" required></textarea><br>
+            <div class="order__pay_method">
+                <p class="order__title">Способ оплаты *</p>
+                <select class="order__select" name="payMethod" required>
+                    <option class="order__select_first-child" value="">Способ оплаты</option>
+                    <option value="Наличкой">Наличкой</option>
+                    <option value="Картой при получении">Картой при получении</option>
+                </select>
+            </div>
+            <p class="order__title order__title_note">( * обязательно к заполнению! )</p>
+            <div>
+                <p class="order__title">Предположительная дата доставки:&nbsp; {{ deliveryDate }}</p>
+                <p class="order__total_price">Итого к оплате:&nbsp; {{ totalPrice.sum }}</p>
+                <input class="order__submit" type="submit" value="Оформить заказ">
+            </div>
+        </form>
+        {% endif %}
+    </section>
+    <table>
+        <tr>
+            <th style="width: 50%">Название товара</th>
+            <th style="width: 25%">Количество</th>
+            <th style="width: 25%">Цена</th>
+        </tr>
+        {% for item in orderInfo %}
+        <tr>
+            <td>{{ item.name }}</td>
+            <td>{{ item.count }}</td>
+            <td>{{ item.price }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+<script src="public/js/orderRegChangeData.js">
+</script>
+{% endif %}

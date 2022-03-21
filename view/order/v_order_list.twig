@@ -1,0 +1,13 @@
+<div id="order_list" user="{{ userId }}">
+    {% for item in data %}
+    <div style="display: flex; margin-bottom: 10px;">
+        <p style="width: 170px">Номер заказа:&nbsp;  {{ item.id }}</p>
+        <p style="width: 250px;">Статус заказа:&nbsp; <span id="statusUp_{{ item.id }}">{{ item.status }}</span></p>
+        <p style="margin-right: 20px">Дата оформления:&nbsp; {{ item.date }}</p>
+        <a href="index.php?c=order&act=OrderInfo&id={{ item.id }}">Подробнее</a>
+    </div>
+    {% endfor %}
+</div>
+
+<a class="Order" href="index.php?c=user&act=Profile">Вернуться назад</a>
+<script src="public/js/checkOrderStatus.js"></script>

@@ -1,0 +1,30 @@
+{% if not admin %}
+{% for item in data %}
+<li class="catalog__item">
+    <a href="index.php?c=catalog&act=GetGoodInfo&id={{ item.id }}>"><img height="230" src="public/images/goods/{{ item.img }}" alt="photo"></a>
+    <div class="catalog__info">
+        <a class="catalog__link" href="index.php?c=catalog&act=GetGoodInfo&id={{ item.id }}"><p>Название товара:{{ item.name }}</p></a>
+        <p class="catalog__price">Цена:&nbsp; {{ item.price }}руб.</p>
+        <p>Краткая информация:&nbsp; {{ item.info }}</p>
+        <p class="catalog__gender">Пол:&nbsp; {{ item.gen_name }}</p>
+        <p>Категория:&nbsp; {{ item.good_cat_name }}</p>
+        <button onclick="addToCart({{ item.id }}, '{{ id }}')" class="catalog__btn">Добавить в корзину</button>
+    </div>
+</li>
+{% endfor %}
+{% else %}
+{% for item in data %}
+<li class="catalog__item" id="{{ item.id }}">
+    <img height="230" src="public/images/goods/{{ item.img }}" alt="photo">
+    <div class="catalog__info">
+        <p class="catalog__link">Название товара:&nbsp; {{ item.name }}</p>
+        <p class="catalog__price">Цена:&nbsp; {{ item.price }}руб.</p>
+        <p>Краткая информация:&nbsp; {{ item.info }}</p>
+        <p class="catalog__gender">Пол:&nbsp; {{ item.gen_name }}</p>
+        <p>Категория:&nbsp; {{ item.good_cat_name }}</p>
+        <button onclick="changeForm({{ item.id }})" style="margin: 10px 0">Изменить</button><br>
+        <button onclick="deleteGood({{ item.id }})">Удалить</button>
+    </div>
+</li>
+{% endfor %}
+{% endif %}

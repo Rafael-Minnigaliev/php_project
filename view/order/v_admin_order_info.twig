@@ -1,0 +1,22 @@
+<table>
+    <tr>
+        <th>№ товара</th>
+        <th>Название товара</th>
+        <th>Количество</th>
+        <th>Цена за одну</th>
+        <th>Действие</th>
+    </tr>
+    <?php
+    {% for item in data %}
+    <tr>
+        <td>{{ item.id }}</td>
+        <td>{{ item.name }}</td>
+        <td><input style="width: 40px; padding-left: 10px" type="number" id="count_{{ item.id }}" onchange="changeCountFromOrder({{ item.id }}, {{ item.users_id }}, {{ orderId }})" min="1" max="10" value="{{ item.count }}"></td>
+        <td>{{ item.price }}</td>
+        <td><button onclick="deleteFromOrder({{ item.id }}, {{ item.users_id }}, {{ orderId }})">Удалить</button></td>
+    </tr>
+    {% endfor %}
+</table>
+<h2 style="margin: 20px 0 20px">Общая стоимость:</h2>
+<a href="index.php?c=order&act=AdminOrderList">Вернуться назад</a>
+<script src="public/js/orderManagement.js"></script>

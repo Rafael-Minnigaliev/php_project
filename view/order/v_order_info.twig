@@ -1,0 +1,18 @@
+<table>
+    <tr>
+        <th>Название товара</th>
+        <th>Количество</th>
+        <th>Цена за одну</th>
+        <th>Цена * количество</th>
+    </tr>
+   {% for item in data %}
+    <tr>
+        <td>{{ item.name }}</td>
+        <td>{{ item.count }}</td>
+        <td>{{ item.price }}</td>
+        <td>{{ item.total_price }}</td>
+    </tr>
+    {% endfor %}
+</table>
+<h2 style="margin: 20px 0 20px">Общая стоимость:&nbsp; {{ price.sum }}</h2>
+<a href="index.php?c=order&act=OrderList">Вернуться назад</a>
